@@ -1,0 +1,36 @@
+# Secrets — never commit
+.env
+.env.*
+*.env
+.secrets
+*.pem
+*.key
+id_rsa*
+secrets.json
+credentials.json
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS
+.DS_Store
+._*
+Thumbs.db
+
+# Editors
+.idea/
+.vscode/*
+!.vscode/settings.json
+*.swp
+*~
+
+# Temp
+tmp/
+temp/
+*.tmp
+*.bak
+*.old
+*.orig
