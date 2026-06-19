@@ -2,7 +2,7 @@
 
 > Load this for the email/social-login path: give a non-crypto user a Solana wallet they never have to think about. For existing-wallet users (Phantom/Solflare), use the wallet-adapter / `phantom-connect` path instead.
 >
-> Stack note: Privy examples below target `@privy-io/react-auth`. Kit/v2 signer wiring: verified-docs pass pending.
+> Stack note: Privy examples below target `@privy-io/react-auth`. To use these with Solana Kit, expose the embedded wallet as a Kit `TransactionSigner` — `@solana/react` provides `useWalletAccountTransactionSendingSigner` / `createTransactionSignerFromWalletAccount` for wallet-standard wallets, or wrap Privy's `signTransaction` in a small partial-signer adapter. The relay flow in `sponsor-relays.md` consumes that signer.
 
 ## Goal
 
