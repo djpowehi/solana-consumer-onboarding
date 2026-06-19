@@ -119,6 +119,8 @@ const ALLOWED_HELPER_PROGRAMS = new Set([ComputeBudget, Token, AssociatedToken])
 
 This is the validation spine, distilled from a relay running on Solana mainnet. Logic is shown with classic web3.js (`Transaction`, `instruction.keys`) because it maps 1:1 to what's on-chain; the Kit/v2 equivalent inspects the decompiled message instructions the same way (`programAddress`, `accounts[].address`, `.role`). The *checks* are what matter, not the API surface.
 
+> In these snippets `reject(msg)` is shorthand for "refuse this transaction" — implement it however your framework does (throw an error your handler turns into a `4xx`, or `return Response.json({ error: msg }, { status: 400 })`). The point is to refuse before the sponsor ever signs.
+
 ```ts
 const ALLOWED_DISCRIMINATORS = new Set<number>([/* your user-action ixs ONLY */]);
 const ALLOWED_HELPER_PROGRAMS = new Set([ComputeBudget, Token, AssociatedToken]); // NO System
