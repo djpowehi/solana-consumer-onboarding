@@ -83,7 +83,7 @@ That's the wallet-adapter / `phantom-connect` path, and this skill routes you th
 
 ```bash
 # As a submodule of the Solana AI Kit (matches the kit's ext/ layout):
-git submodule add https://github.com/djpowehi/solana-consumer-onboarding .claude/skills/ext/consumer-onboarding
+git submodule add https://github.com/djpowehi/solana-consumer-onboarding .claude/skills/ext/solana-consumer-onboarding
 
 # Or standalone into a project's skills dir:
 ./install.sh
