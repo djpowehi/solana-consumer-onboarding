@@ -20,6 +20,24 @@ The ecosystem has plenty of *protocol-level* gasless (Jupiter `/order`, DFlow sp
 
 It was **extracted from a live Solana mainnet consumer app** — a real product onboarding non-crypto users via email login, with a hot-wallet sponsor relay paying gas and rent, secured by a per-instruction allowlist that rejects any transaction trying to use the sponsor as a value-moving authority. The security model in [`skill/relay-security.md`](skill/relay-security.md) is not theoretical; it's the validator that guards a real treasury.
 
+## How it works
+
+```
+ User  (email / Google login — no seed phrase, no SOL)
+   │   signs as themselves via an embedded wallet (invisible — no popup)
+   ▼
+ Partially-signed transaction   (fee payer = sponsor; sponsor slot left empty)
+   │   POST to your relay endpoint
+   ▼
+ Relay Validator   ── deny-by-default: allowlist programs + instructions,
+   │                  reject the sponsor in any slot but fee payer  → relay-security.md
+   ▼
+ Sponsor signature added   (only if every check passes)
+   │
+   ▼
+ Broadcast  →  client confirms
+```
+
 ## What's inside
 
 A progressively-loaded skill following the Solana AI Kit shape: a routing [`SKILL.md`](skill/SKILL.md) entry point with an opinionated decision tree, plus focused modules loaded only when needed.
@@ -43,6 +61,17 @@ await connection.sendRawTransaction(tx.serialize());
 ```
 
 with a validated relay that denies by default.
+
+## FAQ
+
+### Why not just use protocol gasless (Jupiter `/order`, DFlow)?
+Those solve a different problem: using *a specific protocol's* built-in sponsored flow. This skill is for **your own app** — safely sponsoring arbitrary application actions (account creation, your program's instructions) and protecting the relay treasury while doing it. **Protocol gasless ≠ application gasless.**
+
+### Can I copy the relay code and ship it?
+Not without the validation. A relay that signs whatever a client sends is a wallet-drainer with a public endpoint. The security model in [`relay-security.md`](skill/relay-security.md) — per-instruction allowlist, sponsor-only-as-fee-payer, drain prevention — *is* the product, not an add-on.
+
+### What about users who already have Phantom/Solflare?
+That's the wallet-adapter / `phantom-connect` path, and this skill routes you there. It owns the *no-wallet, no-SOL* audience — and you can still sponsor an existing-wallet user's gas with the same relay.
 
 ## Stack
 
