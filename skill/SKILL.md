@@ -2,6 +2,22 @@
 name: solana-consumer-onboarding
 description: Build Solana apps for people who don't know they're using Solana. Email/social login (embedded wallets), gasless transactions via a sponsor relay, safe sponsorship (per-instruction allowlists + drain prevention), one-tap account creation, transaction bundling, and production operations. Extracted from a live Solana mainnet consumer app. For protocol/program development, delegates to solana-dev-skill.
 user-invocable: true
+license: MIT
+metadata:
+  author: djpowehi
+  version: "1.0.0"
+tags:
+  - consumer-onboarding
+  - gasless
+  - sponsor-relay
+  - fee-payer
+  - embedded-wallets
+  - privy
+  - account-abstraction
+  - transaction-bundling
+  - relay-security
+  - solana-kit
+  - web3js
 ---
 
 # Solana Consumer Onboarding

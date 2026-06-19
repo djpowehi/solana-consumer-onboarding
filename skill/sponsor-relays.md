@@ -105,6 +105,8 @@ export async function POST(req) {
 
 ---
 
+> **Address Lookup Tables:** `decompileTransactionMessage` covers plain v0 transactions (the common onboarding case). If your transactions use ALTs, swap in the async `decompileTransactionMessageFetchingLookupTables(compiled, rpc)` so the looked-up account addresses resolve before you validate them — otherwise an ALT-referenced account could slip past the sponsor checks.
+
 ## Mainnet-validated reference — web3.js 1.x
 
 The same relay as shipped on mainnet. Use when an existing codebase is on classic web3.js.
